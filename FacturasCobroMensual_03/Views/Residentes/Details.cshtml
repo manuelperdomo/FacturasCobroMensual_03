@@ -1,0 +1,74 @@
+﻿@model FacturasCobroMensual_03.Models.Residentes
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Residentes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cedula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cedula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CorreoElectronico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CorreoElectronico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nota)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nota)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inquilino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inquilino)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDResidente }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<FacturasCobroMensual_03.Models.Casas>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroCasa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Calle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nota)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Residentes.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroCasa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Calle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nota)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Residentes.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDCasa }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDCasa }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDCasa })
+        </td>
+    </tr>
+}
+
+</table>

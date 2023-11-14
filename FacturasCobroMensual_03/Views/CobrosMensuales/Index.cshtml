@@ -1,0 +1,69 @@
+﻿@model IEnumerable<FacturasCobroMensual_03.Models.CobrosMensuales>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    <a href="https://localhost:44384/CobrosMensuales/GenerarCobrosMensuales">
+        <button>Cosas</button>
+    </a>
+
+</p>
+<table class="table">
+
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Mes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MontoAPagar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MontoPagado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeudaAnterior)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Residentes.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Residentes1.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MontoAPagar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MontoPagado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeudaAnterior)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Residentes.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Residentes1.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDCobroMensual }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDCobroMensual }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDCobroMensual })
+        </td>
+    </tr>
+}
+
+</table>

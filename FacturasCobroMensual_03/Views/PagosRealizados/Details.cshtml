@@ -1,0 +1,90 @@
+﻿@model FacturasCobroMensual_03.Models.PagosRealizados
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PagosRealizados</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaPago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaPago)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Monto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Monto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MesesPagoPrueba)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MesesPagoPrueba)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adm.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adm.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Año.NumeroAño)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Año.NumeroAño)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Casas.NumeroCasa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Casas.NumeroCasa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Meses.NombreMes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Meses.NombreMes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Residentes.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Residentes.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDPago }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

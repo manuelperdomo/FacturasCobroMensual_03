@@ -1,0 +1,33 @@
+﻿@model IEnumerable<FacturasCobroMensual_03.Models.Año>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroAño)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroAño)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDAño }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDAño }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDAño })
+        </td>
+    </tr>
+}
+
+</table>

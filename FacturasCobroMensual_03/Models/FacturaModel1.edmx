@@ -1,0 +1,588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Factura_01Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adm">
+          <Key>
+            <PropertyRef Name="IDAdm" />
+          </Key>
+          <Property Name="IDAdm" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="15" />
+          <Property Name="Correo" Type="varchar" MaxLength="25" />
+          <Property Name="Pass" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Año">
+          <Key>
+            <PropertyRef Name="IDAño" />
+          </Key>
+          <Property Name="IDAño" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroAño" Type="nchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="Casas">
+          <Key>
+            <PropertyRef Name="IDCasa" />
+          </Key>
+          <Property Name="IDCasa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroCasa" Type="varchar" MaxLength="10" />
+          <Property Name="Calle" Type="varchar" MaxLength="20" />
+          <Property Name="Nota" Type="varchar" MaxLength="60" />
+          <Property Name="IDResidente" Type="int" />
+        </EntityType>
+        <EntityType Name="CobrosMensuales">
+          <Key>
+            <PropertyRef Name="IDCobroMensual" />
+          </Key>
+          <Property Name="IDCobroMensual" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDResidente" Type="int" />
+          <Property Name="Mes" Type="datetime" Nullable="false" />
+          <Property Name="MontoAPagar" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="MontoPagado" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DeudaAnterior" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Meses">
+          <Key>
+            <PropertyRef Name="IDMes" />
+          </Key>
+          <Property Name="IDMes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreMes" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PagosRealizados">
+          <Key>
+            <PropertyRef Name="IDPago" />
+          </Key>
+          <Property Name="IDPago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDResidente" Type="int" />
+          <Property Name="IDCasas" Type="int" />
+          <Property Name="IDAtendidoPor" Type="int" />
+          <Property Name="FechaPago" Type="datetime" />
+          <Property Name="Monto" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="IDMeses" Type="int" />
+          <Property Name="IDAño" Type="int" />
+          <Property Name="MesesPagoPrueba" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Residentes">
+          <Key>
+            <PropertyRef Name="IDResidente" />
+          </Key>
+          <Property Name="IDResidente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" />
+          <Property Name="Cedula" Type="varchar" MaxLength="15" />
+          <Property Name="CorreoElectronico" Type="varchar" MaxLength="100" />
+          <Property Name="Telefono" Type="varchar" MaxLength="15" />
+          <Property Name="Nota" Type="varchar" MaxLength="60" />
+          <Property Name="Inquilino" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__Casas__IDResiden__38996AB5">
+          <End Role="Residentes" Type="Self.Residentes" Multiplicity="0..1" />
+          <End Role="Casas" Type="Self.Casas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residentes">
+              <PropertyRef Name="IDResidente" />
+            </Principal>
+            <Dependent Role="Casas">
+              <PropertyRef Name="IDResidente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CobrosMen__IDRes__662B2B3B">
+          <End Role="Residentes" Type="Self.Residentes" Multiplicity="0..1" />
+          <End Role="CobrosMensuales" Type="Self.CobrosMensuales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residentes">
+              <PropertyRef Name="IDResidente" />
+            </Principal>
+            <Dependent Role="CobrosMensuales">
+              <PropertyRef Name="IDResidente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CobrosMen__IDRes__671F4F74">
+          <End Role="Residentes" Type="Self.Residentes" Multiplicity="0..1" />
+          <End Role="CobrosMensuales" Type="Self.CobrosMensuales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residentes">
+              <PropertyRef Name="IDResidente" />
+            </Principal>
+            <Dependent Role="CobrosMensuales">
+              <PropertyRef Name="IDResidente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PagosReal__IDAte__59063A47">
+          <End Role="Adm" Type="Self.Adm" Multiplicity="0..1" />
+          <End Role="PagosRealizados" Type="Self.PagosRealizados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adm">
+              <PropertyRef Name="IDAdm" />
+            </Principal>
+            <Dependent Role="PagosRealizados">
+              <PropertyRef Name="IDAtendidoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PagosReal__IDCas__59FA5E80">
+          <End Role="Casas" Type="Self.Casas" Multiplicity="0..1" />
+          <End Role="PagosRealizados" Type="Self.PagosRealizados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Casas">
+              <PropertyRef Name="IDCasa" />
+            </Principal>
+            <Dependent Role="PagosRealizados">
+              <PropertyRef Name="IDCasas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PagosReal__IDRes__5AEE82B9">
+          <End Role="Residentes" Type="Self.Residentes" Multiplicity="0..1" />
+          <End Role="PagosRealizados" Type="Self.PagosRealizados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residentes">
+              <PropertyRef Name="IDResidente" />
+            </Principal>
+            <Dependent Role="PagosRealizados">
+              <PropertyRef Name="IDResidente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PagosRealizados_Año">
+          <End Role="Año" Type="Self.Año" Multiplicity="0..1" />
+          <End Role="PagosRealizados" Type="Self.PagosRealizados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Año">
+              <PropertyRef Name="IDAño" />
+            </Principal>
+            <Dependent Role="PagosRealizados">
+              <PropertyRef Name="IDAño" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PagosRealizados_Meses">
+          <End Role="Meses" Type="Self.Meses" Multiplicity="0..1" />
+          <End Role="PagosRealizados" Type="Self.PagosRealizados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meses">
+              <PropertyRef Name="IDMes" />
+            </Principal>
+            <Dependent Role="PagosRealizados">
+              <PropertyRef Name="IDMeses" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Factura_01Model1StoreContainer">
+          <EntitySet Name="Adm" EntityType="Self.Adm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Año" EntityType="Self.Año" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Casas" EntityType="Self.Casas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CobrosMensuales" EntityType="Self.CobrosMensuales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meses" EntityType="Self.Meses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PagosRealizados" EntityType="Self.PagosRealizados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Residentes" EntityType="Self.Residentes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Casas__IDResiden__38996AB5" Association="Self.FK__Casas__IDResiden__38996AB5">
+            <End Role="Residentes" EntitySet="Residentes" />
+            <End Role="Casas" EntitySet="Casas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CobrosMen__IDRes__662B2B3B" Association="Self.FK__CobrosMen__IDRes__662B2B3B">
+            <End Role="Residentes" EntitySet="Residentes" />
+            <End Role="CobrosMensuales" EntitySet="CobrosMensuales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CobrosMen__IDRes__671F4F74" Association="Self.FK__CobrosMen__IDRes__671F4F74">
+            <End Role="Residentes" EntitySet="Residentes" />
+            <End Role="CobrosMensuales" EntitySet="CobrosMensuales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PagosReal__IDAte__59063A47" Association="Self.FK__PagosReal__IDAte__59063A47">
+            <End Role="Adm" EntitySet="Adm" />
+            <End Role="PagosRealizados" EntitySet="PagosRealizados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PagosReal__IDCas__59FA5E80" Association="Self.FK__PagosReal__IDCas__59FA5E80">
+            <End Role="Casas" EntitySet="Casas" />
+            <End Role="PagosRealizados" EntitySet="PagosRealizados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PagosReal__IDRes__5AEE82B9" Association="Self.FK__PagosReal__IDRes__5AEE82B9">
+            <End Role="Residentes" EntitySet="Residentes" />
+            <End Role="PagosRealizados" EntitySet="PagosRealizados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PagosRealizados_Año" Association="Self.FK_PagosRealizados_Año">
+            <End Role="Año" EntitySet="Año" />
+            <End Role="PagosRealizados" EntitySet="PagosRealizados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PagosRealizados_Meses" Association="Self.FK_PagosRealizados_Meses">
+            <End Role="Meses" EntitySet="Meses" />
+            <End Role="PagosRealizados" EntitySet="PagosRealizados" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Factura_01Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Adm">
+          <Key>
+            <PropertyRef Name="IDAdm" />
+          </Key>
+          <Property Name="IDAdm" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Pass" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PagosRealizados" Relationship="Self.FK__PagosReal__IDAte__59063A47" FromRole="Adm" ToRole="PagosRealizados" />
+        </EntityType>
+        <EntityType Name="Año">
+          <Key>
+            <PropertyRef Name="IDAño" />
+          </Key>
+          <Property Name="IDAño" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroAño" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="PagosRealizados" Relationship="Self.FK_PagosRealizados_Año" FromRole="Año" ToRole="PagosRealizados" />
+        </EntityType>
+        <EntityType Name="Casas">
+          <Key>
+            <PropertyRef Name="IDCasa" />
+          </Key>
+          <Property Name="IDCasa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroCasa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Calle" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Nota" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="IDResidente" Type="Int32" />
+          <NavigationProperty Name="Residentes" Relationship="Self.FK__Casas__IDResiden__38996AB5" FromRole="Casas" ToRole="Residentes" />
+          <NavigationProperty Name="PagosRealizados" Relationship="Self.FK__PagosReal__IDCas__59FA5E80" FromRole="Casas" ToRole="PagosRealizados" />
+        </EntityType>
+        <EntityType Name="CobrosMensuales">
+          <Key>
+            <PropertyRef Name="IDCobroMensual" />
+          </Key>
+          <Property Name="IDCobroMensual" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDResidente" Type="Int32" />
+          <Property Name="Mes" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MontoAPagar" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="MontoPagado" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DeudaAnterior" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Residentes" Relationship="Self.FK__CobrosMen__IDRes__662B2B3B" FromRole="CobrosMensuales" ToRole="Residentes" />
+          <NavigationProperty Name="Residentes1" Relationship="Self.FK__CobrosMen__IDRes__671F4F74" FromRole="CobrosMensuales" ToRole="Residentes" />
+        </EntityType>
+        <EntityType Name="Meses">
+          <Key>
+            <PropertyRef Name="IDMes" />
+          </Key>
+          <Property Name="IDMes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreMes" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PagosRealizados" Relationship="Self.FK_PagosRealizados_Meses" FromRole="Meses" ToRole="PagosRealizados" />
+        </EntityType>
+        <EntityType Name="PagosRealizados">
+          <Key>
+            <PropertyRef Name="IDPago" />
+          </Key>
+          <Property Name="IDPago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDResidente" Type="Int32" />
+          <Property Name="IDCasas" Type="Int32" />
+          <Property Name="IDAtendidoPor" Type="Int32" />
+          <Property Name="FechaPago" Type="DateTime" Precision="3" />
+          <Property Name="Monto" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IDMeses" Type="Int32" />
+          <Property Name="IDAño" Type="Int32" />
+          <Property Name="MesesPagoPrueba" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Adm" Relationship="Self.FK__PagosReal__IDAte__59063A47" FromRole="PagosRealizados" ToRole="Adm" />
+          <NavigationProperty Name="Año" Relationship="Self.FK_PagosRealizados_Año" FromRole="PagosRealizados" ToRole="Año" />
+          <NavigationProperty Name="Casas" Relationship="Self.FK__PagosReal__IDCas__59FA5E80" FromRole="PagosRealizados" ToRole="Casas" />
+          <NavigationProperty Name="Meses" Relationship="Self.FK_PagosRealizados_Meses" FromRole="PagosRealizados" ToRole="Meses" />
+          <NavigationProperty Name="Residentes" Relationship="Self.FK__PagosReal__IDRes__5AEE82B9" FromRole="PagosRealizados" ToRole="Residentes" />
+        </EntityType>
+        <EntityType Name="Residentes">
+          <Key>
+            <PropertyRef Name="IDResidente" />
+          </Key>
+          <Property Name="IDResidente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cedula" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Nota" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Inquilino" Type="Boolean" />
+          <NavigationProperty Name="Casas" Relationship="Self.FK__Casas__IDResiden__38996AB5" FromRole="Residentes" ToRole="Casas" />
+          <NavigationProperty Name="CobrosMensuales" Relationship="Self.FK__CobrosMen__IDRes__662B2B3B" FromRole="Residentes" ToRole="CobrosMensuales" />
+          <NavigationProperty Name="CobrosMensuales1" Relationship="Self.FK__CobrosMen__IDRes__671F4F74" FromRole="Residentes" ToRole="CobrosMensuales" />
+          <NavigationProperty Name="PagosRealizados" Relationship="Self.FK__PagosReal__IDRes__5AEE82B9" FromRole="Residentes" ToRole="PagosRealizados" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__PagosReal__IDAte__59063A47">
+          <End Role="Adm" Type="Self.Adm" Multiplicity="0..1" />
+          <End Role="PagosRealizados" Type="Self.PagosRealizados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adm">
+              <PropertyRef Name="IDAdm" />
+            </Principal>
+            <Dependent Role="PagosRealizados">
+              <PropertyRef Name="IDAtendidoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PagosRealizados_Año">
+          <End Role="Año" Type="Self.Año" Multiplicity="0..1" />
+          <End Role="PagosRealizados" Type="Self.PagosRealizados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Año">
+              <PropertyRef Name="IDAño" />
+            </Principal>
+            <Dependent Role="PagosRealizados">
+              <PropertyRef Name="IDAño" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Casas__IDResiden__38996AB5">
+          <End Role="Residentes" Type="Self.Residentes" Multiplicity="0..1" />
+          <End Role="Casas" Type="Self.Casas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residentes">
+              <PropertyRef Name="IDResidente" />
+            </Principal>
+            <Dependent Role="Casas">
+              <PropertyRef Name="IDResidente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PagosReal__IDCas__59FA5E80">
+          <End Role="Casas" Type="Self.Casas" Multiplicity="0..1" />
+          <End Role="PagosRealizados" Type="Self.PagosRealizados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Casas">
+              <PropertyRef Name="IDCasa" />
+            </Principal>
+            <Dependent Role="PagosRealizados">
+              <PropertyRef Name="IDCasas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CobrosMen__IDRes__662B2B3B">
+          <End Role="Residentes" Type="Self.Residentes" Multiplicity="0..1" />
+          <End Role="CobrosMensuales" Type="Self.CobrosMensuales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residentes">
+              <PropertyRef Name="IDResidente" />
+            </Principal>
+            <Dependent Role="CobrosMensuales">
+              <PropertyRef Name="IDResidente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CobrosMen__IDRes__671F4F74">
+          <End Role="Residentes" Type="Self.Residentes" Multiplicity="0..1" />
+          <End Role="CobrosMensuales" Type="Self.CobrosMensuales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residentes">
+              <PropertyRef Name="IDResidente" />
+            </Principal>
+            <Dependent Role="CobrosMensuales">
+              <PropertyRef Name="IDResidente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PagosRealizados_Meses">
+          <End Role="Meses" Type="Self.Meses" Multiplicity="0..1" />
+          <End Role="PagosRealizados" Type="Self.PagosRealizados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meses">
+              <PropertyRef Name="IDMes" />
+            </Principal>
+            <Dependent Role="PagosRealizados">
+              <PropertyRef Name="IDMeses" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PagosReal__IDRes__5AEE82B9">
+          <End Role="Residentes" Type="Self.Residentes" Multiplicity="0..1" />
+          <End Role="PagosRealizados" Type="Self.PagosRealizados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residentes">
+              <PropertyRef Name="IDResidente" />
+            </Principal>
+            <Dependent Role="PagosRealizados">
+              <PropertyRef Name="IDResidente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Factura_01Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adm" EntityType="Self.Adm" />
+          <EntitySet Name="Año" EntityType="Self.Año" />
+          <EntitySet Name="Casas" EntityType="Self.Casas" />
+          <EntitySet Name="CobrosMensuales" EntityType="Self.CobrosMensuales" />
+          <EntitySet Name="Meses" EntityType="Self.Meses" />
+          <EntitySet Name="PagosRealizados" EntityType="Self.PagosRealizados" />
+          <EntitySet Name="Residentes" EntityType="Self.Residentes" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK__PagosReal__IDAte__59063A47" Association="Self.FK__PagosReal__IDAte__59063A47">
+            <End Role="Adm" EntitySet="Adm" />
+            <End Role="PagosRealizados" EntitySet="PagosRealizados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PagosRealizados_Año" Association="Self.FK_PagosRealizados_Año">
+            <End Role="Año" EntitySet="Año" />
+            <End Role="PagosRealizados" EntitySet="PagosRealizados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Casas__IDResiden__38996AB5" Association="Self.FK__Casas__IDResiden__38996AB5">
+            <End Role="Residentes" EntitySet="Residentes" />
+            <End Role="Casas" EntitySet="Casas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PagosReal__IDCas__59FA5E80" Association="Self.FK__PagosReal__IDCas__59FA5E80">
+            <End Role="Casas" EntitySet="Casas" />
+            <End Role="PagosRealizados" EntitySet="PagosRealizados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CobrosMen__IDRes__662B2B3B" Association="Self.FK__CobrosMen__IDRes__662B2B3B">
+            <End Role="Residentes" EntitySet="Residentes" />
+            <End Role="CobrosMensuales" EntitySet="CobrosMensuales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CobrosMen__IDRes__671F4F74" Association="Self.FK__CobrosMen__IDRes__671F4F74">
+            <End Role="Residentes" EntitySet="Residentes" />
+            <End Role="CobrosMensuales" EntitySet="CobrosMensuales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PagosRealizados_Meses" Association="Self.FK_PagosRealizados_Meses">
+            <End Role="Meses" EntitySet="Meses" />
+            <End Role="PagosRealizados" EntitySet="PagosRealizados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PagosReal__IDRes__5AEE82B9" Association="Self.FK__PagosReal__IDRes__5AEE82B9">
+            <End Role="Residentes" EntitySet="Residentes" />
+            <End Role="PagosRealizados" EntitySet="PagosRealizados" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Factura_01Model1StoreContainer" CdmEntityContainer="Factura_01Entities1">
+          <EntitySetMapping Name="Adm">
+            <EntityTypeMapping TypeName="Factura_01Model1.Adm">
+              <MappingFragment StoreEntitySet="Adm">
+                <ScalarProperty Name="IDAdm" ColumnName="IDAdm" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Año">
+            <EntityTypeMapping TypeName="Factura_01Model1.Año">
+              <MappingFragment StoreEntitySet="Año">
+                <ScalarProperty Name="IDAño" ColumnName="IDAño" />
+                <ScalarProperty Name="NumeroAño" ColumnName="NumeroAño" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Casas">
+            <EntityTypeMapping TypeName="Factura_01Model1.Casas">
+              <MappingFragment StoreEntitySet="Casas">
+                <ScalarProperty Name="IDCasa" ColumnName="IDCasa" />
+                <ScalarProperty Name="NumeroCasa" ColumnName="NumeroCasa" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+                <ScalarProperty Name="IDResidente" ColumnName="IDResidente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CobrosMensuales">
+            <EntityTypeMapping TypeName="Factura_01Model1.CobrosMensuales">
+              <MappingFragment StoreEntitySet="CobrosMensuales">
+                <ScalarProperty Name="IDCobroMensual" ColumnName="IDCobroMensual" />
+                <ScalarProperty Name="IDResidente" ColumnName="IDResidente" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="MontoAPagar" ColumnName="MontoAPagar" />
+                <ScalarProperty Name="MontoPagado" ColumnName="MontoPagado" />
+                <ScalarProperty Name="DeudaAnterior" ColumnName="DeudaAnterior" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meses">
+            <EntityTypeMapping TypeName="Factura_01Model1.Meses">
+              <MappingFragment StoreEntitySet="Meses">
+                <ScalarProperty Name="IDMes" ColumnName="IDMes" />
+                <ScalarProperty Name="NombreMes" ColumnName="NombreMes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PagosRealizados">
+            <EntityTypeMapping TypeName="Factura_01Model1.PagosRealizados">
+              <MappingFragment StoreEntitySet="PagosRealizados">
+                <ScalarProperty Name="IDPago" ColumnName="IDPago" />
+                <ScalarProperty Name="IDResidente" ColumnName="IDResidente" />
+                <ScalarProperty Name="IDCasas" ColumnName="IDCasas" />
+                <ScalarProperty Name="IDAtendidoPor" ColumnName="IDAtendidoPor" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IDMeses" ColumnName="IDMeses" />
+                <ScalarProperty Name="IDAño" ColumnName="IDAño" />
+                <ScalarProperty Name="MesesPagoPrueba" ColumnName="MesesPagoPrueba" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Residentes">
+            <EntityTypeMapping TypeName="Factura_01Model1.Residentes">
+              <MappingFragment StoreEntitySet="Residentes">
+                <ScalarProperty Name="IDResidente" ColumnName="IDResidente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+                <ScalarProperty Name="Inquilino" ColumnName="Inquilino" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Factura_01Model1.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

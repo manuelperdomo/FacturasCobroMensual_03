@@ -1,0 +1,86 @@
+﻿@model IEnumerable<FacturasCobroMensual_03.Models.Residentes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cedula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CorreoElectronico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nota)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Inquilino)
+        </th>
+        <th></th>
+    </tr>
+
+
+   
+
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cedula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorreoElectronico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nota)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inquilino)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IDResidente }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IDResidente }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IDResidente })
+            </td>
+            <td>
+                @using (Html.BeginForm("RealizarCobroMensualIndividual", "PagosRealizados", FormMethod.Post))
+                {
+                    @Html.Hidden("idResidente", item.IDResidente) // Utiliza item para obtener el ID de cada residente
+                    <label for="monto">Monto a pagar:</label>
+                    <input type="number" name="montoPago" required />
+                    <input type="submit" value="Realizar Pago" />
+                }
+
+
+            </td>
+        </tr>
+    }
+
+</table>

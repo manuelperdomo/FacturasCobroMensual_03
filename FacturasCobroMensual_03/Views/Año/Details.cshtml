@@ -1,0 +1,26 @@
+﻿@model FacturasCobroMensual_03.Models.Año
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Año</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroAño)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroAño)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDAño }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

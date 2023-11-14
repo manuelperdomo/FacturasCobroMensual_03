@@ -1,0 +1,66 @@
+﻿@model FacturasCobroMensual_03.Models.CobrosMensuales
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CobrosMensuales</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Mes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MontoAPagar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MontoAPagar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MontoPagado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MontoPagado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeudaAnterior)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeudaAnterior)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Residentes.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Residentes.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Residentes1.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Residentes1.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDCobroMensual }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
